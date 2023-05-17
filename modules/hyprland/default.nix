@@ -11,7 +11,6 @@ in {
   config = mkIf cfg.enable {
     home.packages = with pkgs; [
       alacritty
-      chromium.package.brave
       eww
       mako
       swayidle
@@ -21,7 +20,8 @@ in {
     ];
 
     wayland.windowManager.hyprland = let
-      brave = "${pkgs.chromium}/bin/brave";
+      # TODO: lauch default browser not specifically `brave`
+      browser = "${pkgs.chromium}/bin/brave";
       mako = "${pkgs.mako}/bin/mako";
       makoctl = "${pkgs.mako}/bin/makoctl";
       swww = "${pkgs.swww}/bin/swww";
@@ -119,7 +119,7 @@ in {
 
       # Program bindings
       bind=$mainMod,Return,exec,${terminal}
-      bind=$mainMod,b,exec,${brave}
+      bind=$mainMod,b,exec,${browser}
       bind=$mainMod,w,exec,${makoctl} dismiss
       bind=$mainMod_SHIFT,h,exec,${terminal-spawn helix}
 
