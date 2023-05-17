@@ -13,6 +13,9 @@ in {
       enable = true;
       userName = "Andrew Dobrich";
       userEmail = "andrew.dobrich@proton.me";
+      aliases = {
+        lg = "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit";
+      };
       extraConfig = {
         init = {defaultBranch = "main";};
         core = {
