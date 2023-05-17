@@ -15,7 +15,16 @@ in {
       userEmail = "andrew.dobrich@proton.me";
       extraConfig = {
         init = {defaultBranch = "main";};
-        core = {excludesfile = "$NIXOS_CONFIG_DIR/scripts/gitignore";};
+        core = {
+          editor = "${pkgs.helix}/bin/hx";
+          excludesfile = "$NIXOS_CONFIG_DIR/scripts/global_gitignore";
+        };
+      };
+      push = {
+        default = "matching";
+      };
+      pull = {
+        rebase = true;
       };
     };
 

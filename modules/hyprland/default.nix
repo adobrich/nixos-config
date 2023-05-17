@@ -35,11 +35,11 @@ in {
       extraConfig = ''
         general {
         	gaps_in = 3
-            gaps_out = 5
-            border_size = 3
-            col.active_border = rgb(ffc0cb)
-            col.inactive_border = rgba(595959aa)
-            cursor_inactive_timeout = 4
+          gaps_out = 5
+          border_size = 3
+          col.active_border = rgb(ffc0cb)
+          col.inactive_border = rgba(595959aa)
+          cursor_inactive_timeout = 4
         }
 
         decoration {
@@ -53,10 +53,10 @@ in {
         	blur_passes = 1
         	blur_new_optimizations = true
         	drop_shadow = false
-        	# shadow_range = 4
-        	# shadow_offset =3 3
-        	# col.shadow = rgba()
-        	# col.shadow_inactive =rgba()
+          # shadow_range = 4
+          # shadow_offset = 3 3
+          # col.shadow = rgba()
+          # col.shadow_inactive = rgba()
         }
 
         dwindle {
@@ -86,10 +86,10 @@ in {
         }
 
         input {
-        	kb_layout=us
-        	touchpad {
-        		disable_while_typing = true
-        	}
+          kb_layout=us
+          touchpad {
+            disable_while_typing = true
+          }
         }
 
         misc {
