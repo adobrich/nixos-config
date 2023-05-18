@@ -46,39 +46,52 @@
     # https://github.com/Misterio77/nix-config
     forEachSystem = nixpkgs.lib.genAttrs ["x86_64-linux" "aarch64-linux"];
     forEachPkgs = f: forEachSystem (system: f nixpkgs.legacyPackages.${system});
-  in {
-    # Host configurations
-    nixosConfigurations = {
-      meshbox = nixpkgs.lib.nixosSystem {
-        specialArgs = {inherit inputs outputs;};
-        modules = [./hosts/meshbox];
-      };
 
-      pinebook-pro = nixpkgs.lib.nixosSystem {
+    # Generate NixOS configurations
+    mkNixConfig = hostName: {
+      ${hostName} = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit inputs outputs;};
-        modules = [./hosts/pinebook-pro];
+        modules = [./hosts/${hostName}];
       };
     };
 
+    # Generate home configurations
+    # users: a list of users to generate
+    # hostName: the host the user(s) will be on
+    # system: the architecture
+    mkHomeConfig = users: hostName: system: (
+      nixpkgs.lib.mapAttrs' (
+        username: _:
+          nixpkgs.lib.nameValuePair "${username}@${hostName}" (
+            home-manager.lib.homeManagerConfiguration {
+              pkgs = nixpkgs.legacyPackages.${system};
+              modules = [
+                ./home-manager/${hostName}/${username}
+              ];
+              extraSpecialArgs = {inherit inputs outputs;};
+            }
+          )
+      ) (nixpkgs.lib.genAttrs users (user: user))
+    );
+  in {
     # Default dev shell config
     devShells = forEachPkgs (pkgs: import ./shell.nix {inherit pkgs;});
 
     # Nix formatter
     formatter = forEachPkgs (pkgs: pkgs.alejandra);
 
-    # Home Configurations for each user/host combo
-    homeConfigurations = {
-      "andy@meshbox" = home-manager.lib.homeManagerConfiguration {
-        extraSpecialArgs = {inherit inputs outputs;};
-        modules = [./home-manager/andy/meshbox];
-        pkgs = nixpkgs.legacyPackages."x86_64-linux";
-      };
+    # Host configurations
+    nixosConfigurations =
+      # Desktop
+      mkNixConfig "meshbox"
+      # Laptop
+      // mkNixConfig "pinebook-pro";
 
-      "andy@pinebook-pro" = home-manager.lib.homeManagerConfiguration {
-        extraSpecialArgs = {inherit inputs outputs;};
-        modules = [./home-manager/andy/pinebook-pro];
-        pkgs = nixpkgs.legacyPackages."aarch64-linux";
-      };
-    };
+    # Home Configurations for each user/host combo
+    homeConfigurations =
+      # Desktop
+      mkHomeConfig ["andy" "minecraft"] "meshbox" "x86_64-linux"
+      # Laptop
+      // mkHomeConfig ["andy"] "pinebook-pro" "aarch64-linux";
   };
 }

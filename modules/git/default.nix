@@ -34,8 +34,12 @@ in {
     # Use libreSSL and start the key agent
     programs.ssh = {
       enable = true;
-      package = pkgs.libressl;
       startAgent = true;
     };
+    services.openssh = {
+      passowrdAuthentication = false;
+      permitRootLogin = lib.mkDeafault "no";
+    };
+    networking.firewall.allowedTCPPorts = [22];
   };
 }
