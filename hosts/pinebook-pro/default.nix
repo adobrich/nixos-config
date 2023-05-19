@@ -13,6 +13,8 @@
     inputs.nixos-hardware.nixosModules.pine64-pinebook-pro
     inputs.nixos-hardware.nixosModules.common-pc-laptop-ssd
 
+    ../../modules/system
+
     # Users
     ../../users/andy
     # ../../users/root
