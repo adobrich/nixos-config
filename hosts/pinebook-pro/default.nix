@@ -2,6 +2,7 @@
   config,
   pkgs,
   inputs,
+  stateVersion,
   ...
 }: {
   imports = [
@@ -9,13 +10,14 @@
     # Kernel, bootloader and filesystem config
     ./hardware-configuration.nix
     # Hardware tweaks/quirks from nixos-hardware
-    inputs.hardware.nixosModules.pine64-pinebook-pro
-    inputs.hardware.nixosModules.common-pc-laptop-ssd
-
-    # Global Software...
+    inputs.nixos-hardware.nixosModules.pine64-pinebook-pro
+    inputs.nixos-hardware.nixosModules.common-pc-laptop-ssd
 
     # Users
     ../../users/andy
-    ../../users/root
+    # ../../users/root
   ];
+
+  # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
+  system.stateVersion = stateVersion;
 }

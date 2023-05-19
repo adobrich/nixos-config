@@ -42,6 +42,10 @@
     ...
   } @ inputs: let
     inherit (self) outputs;
+
+    # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
+    stateVersion = "22.11";
+
     # Functions to generate packages for each system stolen from Misterio77... thanks!
     # https://github.com/Misterio77/nix-config
     forEachSystem = nixpkgs.lib.genAttrs ["x86_64-linux" "aarch64-linux"];
@@ -50,7 +54,7 @@
     # Generate NixOS configurations
     mkNixConfig = hostName: {
       ${hostName} = nixpkgs.lib.nixosSystem {
-        specialArgs = {inherit inputs outputs;};
+        specialArgs = {inherit inputs outputs stateVersion;};
         modules = [./hosts/${hostName}];
       };
     };
