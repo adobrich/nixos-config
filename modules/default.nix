@@ -9,4 +9,4 @@
     ./liquidctl
     ./wofi
   ];
-};
+}
