@@ -11,19 +11,20 @@ in {
   config = mkIf cfg.enable {
     home.packages = with pkgs; [
       eww
+      hyprland
       mako
       swayidle
-      swww
+      # swww
       wl-clipboard
       wofi
     ];
-
+    /*
     wayland.windowManager.hyprland = let
       # TODO: lauch default browser not specifically `brave`
       browser = "${pkgs.chromium}/bin/brave";
       mako = "${pkgs.mako}/bin/mako";
       makoctl = "${pkgs.mako}/bin/makoctl";
-      swww = "${pkgs.swww}/bin/swww";
+      # swww = "${pkgs.swww}/bin/swww";
       swayidle = "${pkgs.swayidle}/bin/swayidle";
       wofi = "${pkgs.wofi}/bin/wofi";
       # TODO: launch default terminal not specifically `alacritty`
@@ -103,7 +104,7 @@ in {
 
         # Startup
         # exec-once=waybar
-        exec=${swww} img ~/wallpaper/current.jpg
+        # exec=swww img ~/wallpaper/current.jpg
         exec-once=${mako}
         exec-once=${swayidle} -w
 
@@ -157,5 +158,6 @@ in {
         bind=$mainMod_SHIFT,4,movetoworkspacesilent,04
       '';
     };
+    */
   };
 }

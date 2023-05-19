@@ -71,9 +71,9 @@
             home-manager.lib.homeManagerConfiguration {
               pkgs = nixpkgs.legacyPackages.${system};
               modules = [
-                ./home-manager/${hostName}/${username}
+                ./home-manager/${username}/${hostName}
               ];
-              extraSpecialArgs = {inherit inputs outputs;};
+              extraSpecialArgs = {inherit inputs outputs stateVersion;};
             }
           )
       ) (nixpkgs.lib.genAttrs users (user: user))

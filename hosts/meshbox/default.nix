@@ -14,6 +14,8 @@
     inputs.nixos-hardware.nixosModules.common-gpu-amd
     inputs.nixos-hardware.nixosModules.common-pc-ssd
 
+    ../../modules/system
+
     # Users
     ../../users/andy
     # ../../users/root
