@@ -59,6 +59,7 @@
     # users: a list of users to generate
     # hostName: the host the user(s) will be on
     # system: the architecture
+    # TODO: simplify the function.
     mkHomeConfig = users: hostName: system: (
       nixpkgs.lib.mapAttrs' (
         username: _:
