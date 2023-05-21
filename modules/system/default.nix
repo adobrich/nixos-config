@@ -117,4 +117,7 @@
       driSupport = true;
     };
   };
+
+  # Extra packages
+  # environment.systemPackages = with pkgs; [swww];
 }

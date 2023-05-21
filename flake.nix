@@ -6,8 +6,9 @@
   inputs = {
     # Access to stable and unstable packages
     # https://github.com/NixOS/nixpkgs
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-22.11";
+    # nixpkgs.url = "github:NixOS/nixpkgs/nixos-22.11";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     # Manage user environments
     # `home-manager` allows declarative configuration of user specifig (non-global)
@@ -48,8 +49,8 @@
 
     # Functions to generate packages for each system stolen from Misterio77... thanks!
     # https://github.com/Misterio77/nix-config
-    forEachSystem = nixpkgs.lib.genAttrs ["x86_64-linux" "aarch64-linux"];
-    forEachPkgs = f: forEachSystem (system: f nixpkgs.legacyPackages.${system});
+    forAllSystems = nixpkgs.lib.genAttrs ["x86_64-linux" "aarch64-linux"];
+    forEachPkg = f: forAllSystems (system: f nixpkgs.legacyPackages.${system});
 
     # Generate NixOS configurations
     mkNixConfig = hostName: {
@@ -69,7 +70,7 @@
         username: _:
           nixpkgs.lib.nameValuePair "${username}@${hostName}" (
             home-manager.lib.homeManagerConfiguration {
-              pkgs = nixpkgs.legacyPackages.${system};
+              pkgs = nixpkgs-unstable.legacyPackages.${system};
               modules = [
                 ./home-manager/${username}/${hostName}
               ];
@@ -79,11 +80,14 @@
       ) (nixpkgs.lib.genAttrs users (user: user))
     );
   in {
-    # Default dev shell config
-    devShells = forEachPkgs (pkgs: import ./shell.nix {inherit pkgs;});
+    # Custom packages and modifications, exported as overlays
+    overlays = import ./overlays {inherit inputs;};
+
+    # Default dev shell config accessible via `nix develop`
+    devShells = forEachPkg (pkgs: import ./shell.nix {inherit pkgs;});
 
     # Nix formatter
-    formatter = forEachPkgs (pkgs: pkgs.alejandra);
+    formatter = forEachPkg (pkgs: pkgs.alejandra);
 
     # Host configurations
     nixosConfigurations =
@@ -95,7 +99,7 @@
     # Home Configurations for each user/host combo
     homeConfigurations =
       # Desktop
-      mkHomeConfig ["andy" "minecraft"] "meshbox" "x86_64-linux"
+      mkHomeConfig ["andy"] "meshbox" "x86_64-linux"
       # Laptop
       // mkHomeConfig ["andy"] "pinebook-pro" "aarch64-linux";
   };

@@ -14,6 +14,8 @@
     inputs.nixos-hardware.nixosModules.common-gpu-amd
     inputs.nixos-hardware.nixosModules.common-pc-ssd
 
+    # inputs.hyprland.homeManagerModules.default
+
     ../../modules/system
 
     # Users
