@@ -1,8 +1,0 @@
-*~
-*.log
-*.out
-.*.swp
-.DS_Store
-bin/
-dist/
-result

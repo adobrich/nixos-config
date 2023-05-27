@@ -14,7 +14,7 @@
     initrd.kernelModules = [];
     kernelModules = [];
     extraModulePackages = [];
-    kernelParams = ["quiet"];
+    kernelParams = ["quiet" "splash" "plymouth.ignore-serial-consoles"];
 
     plymouth.enable = true;
 
@@ -52,7 +52,7 @@
     opengl = {
       enable = true;
       driSupport = true;
-      # TODO: 32 bit dri support
+      setLdLibraryPath = true;
     };
   };
 
@@ -60,5 +60,5 @@
     PAN_MESA_DEBUG = "gl3";
   };
 
-  nixpkgs.hostPlatform = "aarch64-linux";
+  nixpkgs.hostPlatform = lib.mkDefault "aarch64-linux";
 }

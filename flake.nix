@@ -7,7 +7,6 @@
     # Access to stable and unstable packages
     # https://github.com/NixOS/nixpkgs
     # nixpkgs.url = "github:NixOS/nixpkgs/nixos-22.11";
-    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     # Manage user environments
@@ -28,7 +27,6 @@
     # https://github.com/hyprwm/Hyprland
     hyprland = {
       url = "github:hyprwm/Hyprland";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
   };
 
@@ -37,13 +35,12 @@
   outputs = {
     self,
     nixpkgs,
-    nixpkgs-unstable,
     home-manager,
     nixos-hardware,
+    hyprland,
     ...
   } @ inputs: let
     inherit (self) outputs;
-
     # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
     stateVersion = "22.11";
 
@@ -51,37 +48,7 @@
     # https://github.com/Misterio77/nix-config
     forAllSystems = nixpkgs.lib.genAttrs ["x86_64-linux" "aarch64-linux"];
     forEachPkg = f: forAllSystems (system: f nixpkgs.legacyPackages.${system});
-
-    # Generate NixOS configurations
-    mkNixConfig = hostName: {
-      ${hostName} = nixpkgs.lib.nixosSystem {
-        specialArgs = {inherit inputs outputs stateVersion;};
-        modules = [./hosts/${hostName}];
-      };
-    };
-
-    # Generate home configurations
-    # users: a list of users to generate
-    # hostName: the host the user(s) will be on
-    # system: the architecture
-    # TODO: simplify the function.
-    mkHomeConfig = users: hostName: system: (
-      nixpkgs.lib.mapAttrs' (
-        username: _:
-          nixpkgs.lib.nameValuePair "${username}@${hostName}" (
-            home-manager.lib.homeManagerConfiguration {
-              pkgs = nixpkgs-unstable.legacyPackages.${system};
-              modules = [
-                ./home-manager/${username}/${hostName}
-              ];
-              extraSpecialArgs = {inherit inputs outputs stateVersion;};
-            }
-          )
-      ) (nixpkgs.lib.genAttrs users (user: user))
-    );
   in {
-    # Custom packages and modifications, exported as overlays
-    overlays = import ./overlays {inherit inputs;};
 
     # Default dev shell config accessible via `nix develop`
     devShells = forEachPkg (pkgs: import ./shell.nix {inherit pkgs;});
@@ -90,17 +57,33 @@
     formatter = forEachPkg (pkgs: pkgs.alejandra);
 
     # Host configurations
-    nixosConfigurations =
+    nixosConfigurations = {
       # Desktop
-      mkNixConfig "meshbox"
+      meshbox = nixpkgs.lib.nixosSystem {
+        modules = [./hosts/meshbox];
+        specialArgs = {inherit inputs outputs stateVersion;};
+      };
       # Laptop
-      // mkNixConfig "pinebook-pro";
+      pinebook-pro = nixpkgs.lib.nixosSystem {
+        modules = [./hosts/pinebook-pro];
+        specialArgs = {inherit inputs outputs nixos-hardware stateVersion;};
+      };
+    };
 
     # Home Configurations for each user/host combo
-    homeConfigurations =
+    homeConfigurations = {
       # Desktop
-      mkHomeConfig ["andy"] "meshbox" "x86_64-linux"
+      "andy@meshbox" = home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages."x86_64-linux";
+        modules = [./home-manager/andy/meshbox];
+        extraSpecialArgs = {inherit inputs outputs stateVersion;};
+      };
       # Laptop
-      // mkHomeConfig ["andy"] "pinebook-pro" "aarch64-linux";
+      "andy@pinebook-pro" = home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages."aarch64-linux";
+        modules = [./home-manager/andy/pinebook-pro];
+        extraSpecialArgs = {inherit inputs outputs stateVersion;};
+      };
+    };
   };
 }
