@@ -82,8 +82,8 @@ in
   bind=,XF86AudioLowerVolume,exec,wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-
   bind=,XF86AudioRaiseVolume,exec,wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+
   bind=,XF86AudioMute,exec,wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
-  bind=,XF86MonBrightnessUp,exec,light -A 5
-  bind=,XF86MonBrightnessDown,exec,light -U 5
+  bind=,XF86MonBrightnessUp,exec,brightnessctl s 5%
+  bind=,XF86MonBrightnessDown,exec,brightnessctl s 5%-
   bind=,XF86PowerOff,exec,bash ~/dev/scripts/power_menu.sh
 
   # Program bindings

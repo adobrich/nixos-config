@@ -42,7 +42,7 @@
     wget
     git
     nil
-    light
+    brightnessctl
     ripgrep
   ];
 
