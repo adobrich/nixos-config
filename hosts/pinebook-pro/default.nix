@@ -44,6 +44,7 @@
     nil
     brightnessctl
     ripgrep
+    alsa-utils
   ];
 
   users.users.andy = {
@@ -74,6 +75,15 @@
       PasswordAuthentication = false;
       KbdInteractiveAuthentication = false;
     };
+  };
+
+  security.rtkit.enable = true;
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+    jack.enable = true;
   };
 
   fonts = {
