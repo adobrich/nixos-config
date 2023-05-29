@@ -73,7 +73,7 @@ in
   }
 
   # Startup
-  exec-once=waybar
+  # exec-once=waybar
   # exec=swaybg -i ~/wallpaper/current.jpg --mode fill
   # exec-once=mako
   # exec-once=swayidle -w
@@ -82,7 +82,7 @@ in
   bind=,XF86AudioLowerVolume,exec,wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-
   bind=,XF86AudioRaiseVolume,exec,wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+
   bind=,XF86AudioMute,exec,wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
-  bind=,XF86MonBrightnessUp,exec,brightnessctl s 5%
+  bind=,XF86MonBrightnessUp,exec,brightnessctl s 5%+
   bind=,XF86MonBrightnessDown,exec,brightnessctl s 5%-
   bind=,XF86PowerOff,exec,bash ~/dev/scripts/power_menu.sh
 
@@ -98,7 +98,8 @@ in
   # Window Controls
   bind=$mainMod_SHIFT,q,killactive
   bind=$mainMod_SHIFT,e,exit
-  bind=$mainMod,Y,pin
+  # TODO: pin doesn't seem to work. Look into it
+  bind=$mainMod_SHIFT,y,pin
 
   bind=$mainMod,s,togglesplit
   bind=$mainMod,f,fullscreen,1
