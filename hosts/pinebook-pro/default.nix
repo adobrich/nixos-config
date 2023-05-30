@@ -1,13 +1,26 @@
-{inputs, lib, config, pkgs, nixos-hardware, stateVersion, ...}: {
+{
+  inputs,
+  lib,
+  config,
+  pkgs,
+  nixos-hardware,
+  stateVersion,
+  ...
+}: {
   imports = [
     nixos-hardware.nixosModules.pine64-pinebook-pro
     nixos-hardware.nixosModules.common-pc-laptop-ssd
     ./hardware-configuration.nix
   ];
 
-  nix.settings = {
-    experimental-features = "nix-command flakes";
-    auto-optimise-store = true;
+  nix = {
+    settings = {
+      experimental-features = "nix-command flakes";
+      auto-optimise-store = true;
+    };
+    # pin the registry to avoid downloading and evaluating a new
+    # `nixpkgs` version every time
+    registry = lib.mapAttrs (_: v: {flake = v;}) inputs;
   };
 
   nixpkgs = {
@@ -16,11 +29,12 @@
     };
   };
 
+  # TODO: font doesn't seem to change
   console = {
     packages = with pkgs; [terminus_font powerline-fonts];
     earlySetup = true;
-    keyMap = "us";
     font = "ter-powerline-v28n";
+    keyMap = "us";
   };
 
   time.timeZone = "Australia/Melbourne";
@@ -67,14 +81,23 @@
   # TODO: this is defined here and in the home-manager config. Can probably be removed from home-config?
   programs.fish.enable = true;
 
-  services.openssh = {
-    enable = true;
-    openFirewall = true;
-    settings = {
-      PermitRootLogin = "no";
-      PasswordAuthentication = false;
-      KbdInteractiveAuthentication = false;
+  services = {
+    openssh = {
+      enable = true;
+      openFirewall = true;
+      settings = {
+        PermitRootLogin = "no";
+        PasswordAuthentication = false;
+        KbdInteractiveAuthentication = false;
+      };
     };
+    # TODO: nvme won't wake after suspend. Disable lid switch for now.
+    logind.extraConfig = ''
+      RuntimeDirectory=8G
+      HandleLidSwitch=ignore
+      HandlePowerKey=ignore
+      HandlePowerKeyLongPress=poweroff
+    '';
   };
 
   security.rtkit.enable = true;

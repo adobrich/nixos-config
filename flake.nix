@@ -49,7 +49,6 @@
     forAllSystems = nixpkgs.lib.genAttrs ["x86_64-linux" "aarch64-linux"];
     forEachPkg = f: forAllSystems (system: f nixpkgs.legacyPackages.${system});
   in {
-
     # Default dev shell config accessible via `nix develop`
     devShells = forEachPkg (pkgs: import ./shell.nix {inherit pkgs;});
 

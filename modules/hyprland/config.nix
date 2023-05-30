@@ -1,8 +1,6 @@
-{home, ...}:
-let
+{home, ...}: let
   inherit (home.sessionVariables) BROWSER EDITOR TERMINAL;
-in
-''
+in ''
   $mainMod = SUPER
   general {
     gaps_in = 3
@@ -12,7 +10,7 @@ in
     col.inactive_border = rgba(595959aa)
     cursor_inactive_timeout = 4
   }
-  
+
   decoration {
     multisample_edges = true
     active_opacity = 1.0
