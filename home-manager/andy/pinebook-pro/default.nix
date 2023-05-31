@@ -10,6 +10,7 @@
     ../../../modules/hyprland
     ../../../modules/helix
     ../../../modules/git
+    ../../../modules/exa
   ];
   home = {
     username = "andy";
@@ -28,7 +29,6 @@
     home-manager.enable = true;
     direnv.enable = true;
     direnv.nix-direnv.enable = true;
-    exa.enable = true;
     # eww = {
     #   enable = true;
     # };
