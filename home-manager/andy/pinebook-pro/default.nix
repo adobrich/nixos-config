@@ -27,7 +27,6 @@
     home-manager.enable = true;
     direnv.enable = true;
     direnv.nix-direnv.enable = true;
-    git.enable = true;
     exa.enable = true;
     # eww = {
     #   enable = true;

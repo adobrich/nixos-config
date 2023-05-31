@@ -6,6 +6,13 @@
 }: {
   programs.helix = {
     enable = true;
+    settings = {
+      editor = {
+        mouse = false;
+        true-color = true;
+        soft-wrap.enable = true;
+      };
+    };
     languages = {
       language = [
         {
@@ -20,4 +27,6 @@
       ];
     };
   };
+  # Extra language packages
+  home.packages = with pkgs; [alejandra];
 }
