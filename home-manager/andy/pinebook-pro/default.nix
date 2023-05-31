@@ -11,6 +11,7 @@
     ../../../modules/helix
     ../../../modules/git
     ../../../modules/exa
+    ../../../modules/bat
   ];
   home = {
     username = "andy";
@@ -32,7 +33,6 @@
     # eww = {
     #   enable = true;
     # };
-    bat.enable = true;
     foot = {
       enable = true;
       settings = {
