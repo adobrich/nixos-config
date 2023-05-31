@@ -9,6 +9,7 @@
   imports = [
     ../../../modules/hyprland
     ../../../modules/helix
+    ../../../modules/git
   ];
   home = {
     username = "andy";

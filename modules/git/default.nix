@@ -1,4 +1,6 @@
-{pkgs, ...}: {
+{config, ...}: let
+  inherit (config) home;
+in {
   programs.git = {
     enable = true;
     userName = "Andrew Dobrich";
@@ -13,6 +15,9 @@
     };
     aliases = {
       lg = "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit";
+    };
+    extraConfig = {
+      core.editor = home.sessionVariables.EDITOR;
     };
   };
 }
