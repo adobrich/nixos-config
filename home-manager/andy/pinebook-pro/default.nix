@@ -7,14 +7,21 @@
   ...
 }: {
   imports = [
+    # Window manager
     ../../../modules/hyprland
+    # Shell
+    ../../../modules/fish
+    # Terminal
+    ../../../modules/foot
+    # Editor
     ../../../modules/helix
+    # Cli
     ../../../modules/git
     ../../../modules/exa
     ../../../modules/bat
-    ../../../modules/foot
     ../../../modules/wofi
     ../../../modules/starship
+    # Gui Apps
     ../../../modules/firefox
   ];
   home = {
@@ -37,15 +44,6 @@
     # eww = {
     #   enable = true;
     # };
-    fish = {
-      enable = true;
-      loginShellInit = ''
-        set fish_greeting ""
-        if test (tty) = "/dev/tty1"
-          exec Hyprland &> /dev/null
-        end
-      '';
-    };
   };
 
   # Nicely reload system units when changing configs
