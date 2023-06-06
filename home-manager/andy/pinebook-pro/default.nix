@@ -14,6 +14,7 @@
     ../../../modules/bat
     ../../../modules/foot
     ../../../modules/wofi
+    ../../../modules/firefox
   ];
   home = {
     username = "andy";
@@ -35,7 +36,6 @@
     # eww = {
     #   enable = true;
     # };
-    firefox.enable = true;
     # TODO: No ARM support currently
     # chromium = {
     #   enable = true;
