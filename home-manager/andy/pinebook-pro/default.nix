@@ -14,6 +14,7 @@
     ../../../modules/bat
     ../../../modules/foot
     ../../../modules/wofi
+    ../../../modules/starship
     ../../../modules/firefox
   ];
   home = {
@@ -36,23 +37,6 @@
     # eww = {
     #   enable = true;
     # };
-    # TODO: No ARM support currently
-    # chromium = {
-    #   enable = true;
-    #   package = pkgs.brave;
-    #   extensions = [
-    #     "nngceckbapebfimnlniiiahkandclblb" # Bitwarden
-    #     "nplimhmoanghlebhdiboeellhgmgommi" # Tab groups
-    #     "eimadpbcbfnmbkopoojfekhnkhdbieeh" # Dark reader
-    #     "pkehgijcmpdhfbdbbnkijodmdjhbjlgp" # Privacy Badger
-    #   ];
-    # };
-    starship = {
-      enable = true;
-      settings = {
-        command_timeout = 3000;
-      };
-    };
     fish = {
       enable = true;
       loginShellInit = ''
