@@ -2,6 +2,7 @@
   inherit (home.sessionVariables) BROWSER EDITOR TERMINAL;
 in ''
   $mainMod = SUPER
+
   general {
     gaps_in = 3
     gaps_out = 5
@@ -9,6 +10,7 @@ in ''
     col.active_border = rgb(ffc0cb)
     col.inactive_border = rgba(595959aa)
     cursor_inactive_timeout = 4
+    # monitor = eDP-1,addreserved,0,0,50,0 // Reserve space for eww bar?
   }
 
   decoration {

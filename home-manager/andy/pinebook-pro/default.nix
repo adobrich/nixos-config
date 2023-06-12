@@ -23,6 +23,7 @@
     ../../../modules/starship
     # Gui Apps
     ../../../modules/firefox
+    ../../../modules/eww
   ];
   home = {
     username = "andy";
@@ -41,9 +42,6 @@
     home-manager.enable = true;
     direnv.enable = true;
     direnv.nix-direnv.enable = true;
-    # eww = {
-    #   enable = true;
-    # };
   };
 
   # Nicely reload system units when changing configs
