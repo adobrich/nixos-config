@@ -36,8 +36,6 @@
     };
   };
 
-  # TODO: move to modules
-
   programs = {
     home-manager.enable = true;
     direnv.enable = true;

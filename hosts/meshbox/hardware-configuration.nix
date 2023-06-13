@@ -1,6 +1,7 @@
 {
   lib,
   modulesPath,
+  pkgs,
   ...
 }: {
   imports = [
@@ -9,6 +10,7 @@
 
   boot = {
     initrd.availableKernelModules = [
+      "amdgpu"
       "nvme"
       "xhci_pci"
       "ahci"
@@ -43,6 +45,19 @@
   };
 
   swapDevices = [{device = "/dev/disk/by-label/swap";}];
+
+  hardware = {
+    opengl = {
+      enable = true;
+      driSupport = true;
+      driSupport32Bit = true;
+      setLdLibraryPath = true;
+      extraPackages = with pkgs; [
+        rocm-opencl-icd
+        rocm-opencl-runtime
+      ];
+    };
+  };
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 }

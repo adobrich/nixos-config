@@ -129,7 +129,7 @@
       defaultFonts = {
         serif = ["Work Sans"];
         sansSerif = ["Work Sans"];
-        monospace = ["JetBrainsMono Nerdfont"];
+        monospace = ["JetBrainsMono"];
       };
       hinting = {
         enable = true;
