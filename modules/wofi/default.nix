@@ -4,7 +4,7 @@
     style = ''
       * {
         all: unset;
-        font-family: "JetBrainsMono";
+        font-family: "JetBrainsMono Nerdfont";
         font-size: 16px;
       }
 
