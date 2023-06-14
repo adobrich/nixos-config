@@ -93,7 +93,7 @@
     };
     # TODO: nvme won't wake after suspend. Disable lid switch for now.
     logind.extraConfig = ''
-      RuntimeDirectory=8G
+      RuntimeDirectorySize=8G
       HandleLidSwitch=ignore
       HandlePowerKey=ignore
       HandlePowerKeyLongPress=poweroff
