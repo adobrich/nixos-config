@@ -14,9 +14,10 @@
     initrd.kernelModules = [];
     kernelModules = [];
     extraModulePackages = [];
-    kernelParams = ["quiet" "splash" "plymouth.ignore-serial-consoles"];
-
-    plymouth.enable = true;
+    kernelParams = ["quiet"];
+    # Disable plymouth for now as it resets the console font
+    # kernelParams = ["quiet" "plymouth.ignore-serial-consoles"];
+    # plymouth.enable = false;
 
     loader = {
       systemd-boot = {

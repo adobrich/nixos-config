@@ -29,7 +29,7 @@
     };
   };
 
-  # TODO: font doesn't seem to change
+  # TODO: console font seems to be reset shortly after being set. Disabling plymouth seems to fix it.  Check if there is a way to prevent plymouth from resetting the console font. Perhaps this is a driver loading issue?
   console = {
     packages = with pkgs; [terminus_font powerline-fonts];
     earlySetup = true;
