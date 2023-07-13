@@ -67,6 +67,11 @@
         modules = [./hosts/pinebook-pro];
         specialArgs = {inherit inputs outputs nixos-hardware stateVersion;};
       };
+      # Minecraft server
+      minecraft = nixpkgs.lib.nixosSystem {
+        modules = [./hosts/minecraft];
+        specialArgs = {inherit inputs outputs nixos-hardware stateVersion;};
+      };
     };
 
     # Home Configurations for each user/host combo
@@ -81,6 +86,12 @@
       "andy@pinebook-pro" = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages."aarch64-linux";
         modules = [./home-manager/andy/pinebook-pro];
+        extraSpecialArgs = {inherit inputs outputs stateVersion;};
+      };
+      # Minecraft server (Raspberry pi 4)
+      "andy@minecraft" = home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages."aarch64-linux";
+        modules = [./home-manager/andy/minecraft];
         extraSpecialArgs = {inherit inputs outputs stateVersion;};
       };
     };
