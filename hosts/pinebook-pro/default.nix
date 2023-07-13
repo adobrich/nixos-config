@@ -127,10 +127,8 @@
       antialias = true;
       cache32Bit = true;
       defaultFonts = {
-        # serif = ["Work Sans"];
-        # sansSerif = ["Work Sans"];
-        serif = ["JetBrainsMono Nerdfont"];
-        sansSerif = ["JetBrainsMono Nerdfont"];
+        serif = ["Work Sans"];
+        sansSerif = ["Work Sans"];
         monospace = ["JetBrainsMono Nerdfont"];
       };
       hinting = {
