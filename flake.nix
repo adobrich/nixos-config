@@ -42,7 +42,7 @@
   } @ inputs: let
     inherit (self) outputs;
     # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
-    stateVersion = "22.11";
+    stateVersion = "23.05";
 
     # Functions to generate packages for each system stolen from Misterio77... thanks!
     # https://github.com/Misterio77/nix-config

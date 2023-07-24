@@ -117,6 +117,5 @@
   };
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
-  # TODO: update other hosts and change back to global state version
-  system.stateVersion = "23.05";
+  system.stateVersion = stateVersion;
 }
