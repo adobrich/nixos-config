@@ -4,11 +4,11 @@ in ''
   $mainMod = SUPER
 
   general {
-    gaps_in = 3
-    gaps_out = 5
-    border_size = 3
-    col.active_border = rgb(ffc0cb)
-    col.inactive_border = rgba(595959aa)
+    gaps_in = 2
+    gaps_out = 2
+    border_size = 0
+    col.active_border = rgb(000000)
+    col.inactive_border = rgb(000000)
     cursor_inactive_timeout = 4
     # monitor = eDP-1,addreserved,0,0,50,0 // Reserve space for eww bar?
   }
@@ -16,7 +16,7 @@ in ''
   decoration {
     multisample_edges = true
     active_opacity = 1.0
-    inactive_opacity = 0.9
+    inactive_opacity = 0.4
     fullscreen_opacity = 1.0
     rounding = 0
     blur = no
