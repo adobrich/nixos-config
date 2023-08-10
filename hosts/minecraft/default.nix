@@ -43,8 +43,8 @@
     hostName = "minecraft";
     firewall = {
       enable = true;
-      allowedTCPPorts = [80 443];
-      allowedUDPPorts = [80 443];
+      # allowedTCPPorts = [80 443];
+      # allowedUDPPorts = [80 443];
     };
   };
 
@@ -74,7 +74,7 @@
     shell = pkgs.fish;
   };
 
-  # TODO: this is defined here and in the home-manager config. Can probably be removed from home-config?
+  programs.ssh.startAgent = true;
   programs.fish.enable = true;
 
   services = {
@@ -82,8 +82,8 @@
       enable = true;
       openFirewall = true;
       settings = {
-        PermitRootLogin = "no";
-        PasswordAuthentication = false;
+        PermitRootLogin = "yes";
+        PasswordAuthentication = true;
         KbdInteractiveAuthentication = false;
       };
     };

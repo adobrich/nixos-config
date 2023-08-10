@@ -57,6 +57,15 @@
         rocm-opencl-runtime
       ];
     };
+    bluetooth = {
+      enable = true;
+      settings.General = {
+        ControllerMode = "dual";
+        JustWorksRepairing = "always";
+        FastConnectable = true;
+      };
+    };
+    steam-hardware.enable = true;
   };
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
