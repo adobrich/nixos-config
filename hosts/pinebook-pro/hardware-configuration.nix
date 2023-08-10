@@ -14,6 +14,7 @@
     initrd.kernelModules = [];
     kernelModules = [];
     extraModulePackages = [];
+    kernelPackages = pkgs.linuxPackages_latest;
     kernelParams = ["quiet"];
     # Disable plymouth for now as it resets the console font
     # kernelParams = ["quiet" "plymouth.ignore-serial-consoles"];

@@ -16,11 +16,14 @@
     extraModulePackages = [];
 
     loader = {
-      systemd-boot = {
-        enable = true;
-        consoleMode = "max";
-      };
-      efi.canTouchEfiVariables = true;
+      # Bug: https://github.com/NixOS/nixpkgs/issues/173948
+      generic-extlinux-compatible.enable = true;
+
+      # systemd-boot = {
+      #   enable = true;
+      #   consoleMode = "max";
+      # };
+      # efi.canTouchEfiVariables = true;
     };
   };
 

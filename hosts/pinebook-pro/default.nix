@@ -113,14 +113,14 @@
 
   fonts = {
     fontDir.enable = true;
-    fonts = with pkgs; [
+    packages = with pkgs; [
       (nerdfonts.override {fonts = ["JetBrainsMono" "FiraCode" "UbuntuMono"];})
       liberation_ttf
       ubuntu_font_family
       work-sans
     ];
 
-    enableDefaultFonts = false;
+    enableDefaultPackages = false;
 
     fontconfig = {
       enable = true;
