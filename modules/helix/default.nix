@@ -11,6 +11,7 @@
         mouse = false;
         true-color = true;
         soft-wrap.enable = true;
+        theme = "ayu_dark";
       };
     };
     languages = {
