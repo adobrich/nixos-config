@@ -7,11 +7,11 @@
   programs.helix = {
     enable = true;
     settings = {
+      theme = "ayu_dark";
       editor = {
         mouse = false;
         true-color = true;
         soft-wrap.enable = true;
-        theme = "ayu_dark";
       };
     };
     languages = {

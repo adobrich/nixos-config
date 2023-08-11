@@ -52,10 +52,11 @@
       driSupport = true;
       driSupport32Bit = true;
       setLdLibraryPath = true;
-      extraPackages = with pkgs; [
-        rocm-opencl-icd
-        rocm-opencl-runtime
-      ];
+      # TODO: Crashing - comment out for now to see if that fixes the problem
+      # extraPackages = with pkgs; [
+      # rocm-opencl-icd
+      # rocm-opencl-runtime
+      # ];
     };
     bluetooth = {
       enable = true;

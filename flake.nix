@@ -37,7 +37,6 @@
     nixpkgs,
     home-manager,
     nixos-hardware,
-    hyprland,
     ...
   } @ inputs: let
     inherit (self) outputs;
