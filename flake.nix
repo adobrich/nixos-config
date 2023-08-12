@@ -6,7 +6,7 @@
   inputs = {
     # Access to stable and unstable packages
     # https://github.com/NixOS/nixpkgs
-    # nixpkgs.url = "github:NixOS/nixpkgs/nixos-22.11";
+    # nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.11";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     # Manage user environments
@@ -41,7 +41,7 @@
   } @ inputs: let
     inherit (self) outputs;
     # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
-    stateVersion = "23.11";
+    stateVersion = "23.05";
 
     # Functions to generate packages for each system stolen from Misterio77... thanks!
     # https://github.com/Misterio77/nix-config
