@@ -1,6 +1,7 @@
 {
   lib,
   modulesPath,
+  pkgs,
   ...
 }: {
   imports = [
@@ -9,6 +10,7 @@
 
   boot = {
     initrd.availableKernelModules = [
+      "amdgpu"
       "nvme"
       "xhci_pci"
       "ahci"
@@ -43,6 +45,29 @@
   };
 
   swapDevices = [{device = "/dev/disk/by-label/swap";}];
+
+  hardware = {
+    opengl = {
+      enable = true;
+      driSupport = true;
+      driSupport32Bit = true;
+      setLdLibraryPath = true;
+      # TODO: Crashing - comment out for now to see if that fixes the problem
+      # extraPackages = with pkgs; [
+      # rocm-opencl-icd
+      # rocm-opencl-runtime
+      # ];
+    };
+    bluetooth = {
+      enable = true;
+      settings.General = {
+        ControllerMode = "dual";
+        JustWorksRepairing = "always";
+        FastConnectable = true;
+      };
+    };
+    steam-hardware.enable = true;
+  };
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 }

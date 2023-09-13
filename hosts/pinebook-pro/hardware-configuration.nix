@@ -1,5 +1,4 @@
 {
-  config,
   lib,
   pkgs,
   modulesPath,
@@ -14,9 +13,11 @@
     initrd.kernelModules = [];
     kernelModules = [];
     extraModulePackages = [];
-    kernelParams = ["quiet"];
-
-    plymouth.enable = true;
+    kernelPackages = pkgs.linuxPackages_latest;
+    kernelParams = ["quiet" "mem_sleep_default=s2idle"];
+    # Disable plymouth for now as it resets the console font
+    # kernelParams = ["quiet" "plymouth.ignore-serial-consoles"];
+    # plymouth.enable = false;
 
     loader = {
       systemd-boot = {
@@ -52,7 +53,7 @@
     opengl = {
       enable = true;
       driSupport = true;
-      # TODO: 32 bit dri support
+      setLdLibraryPath = true;
     };
   };
 
@@ -60,5 +61,5 @@
     PAN_MESA_DEBUG = "gl3";
   };
 
-  nixpkgs.hostPlatform = "aarch64-linux";
+  nixpkgs.hostPlatform = lib.mkDefault "aarch64-linux";
 }

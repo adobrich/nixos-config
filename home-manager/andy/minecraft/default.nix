@@ -9,8 +9,6 @@
   imports = [
     # Shell
     ../../../modules/fish
-    # Terminal
-    ../../../modules/foot
     # Editor
     ../../../modules/helix
     # Cli
@@ -18,20 +16,13 @@
     ../../../modules/eza
     ../../../modules/bat
     ../../../modules/starship
-    ../../../modules/tealdeer
-    # Gui Apps
-    ../../../modules/brave
-    ../../../modules/steam
-    ../../../modules/nextcloud
   ];
   home = {
     username = "andy";
     homeDirectory = "/home/andy";
     sessionPath = ["$HOME/.local/bin"];
     sessionVariables = {
-      BROWSER = "brave";
       EDITOR = "hx";
-      TERMINAL = "foot";
     };
   };
 
@@ -40,8 +31,6 @@
     direnv.enable = true;
     direnv.nix-direnv.enable = true;
   };
-
-  nixpkgs.config.allowUnfreePredicate = _: true;
 
   # Nicely reload system units when changing configs
   systemd.user.startServices = "sd-switch";

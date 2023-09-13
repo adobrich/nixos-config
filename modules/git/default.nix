@@ -1,45 +1,23 @@
-{
-  pkgs,
-  lib,
-  config,
-  ...
-}:
-with lib; let
-  cfg = config.modules.git;
+{config, ...}: let
+  inherit (config) home;
 in {
-  options.modules.git = {enable = mkEnableOption "git";};
-  config = mkIf cfg.enable {
-    programs.git = {
+  programs.git = {
+    enable = true;
+    userName = "Andrew Dobrich";
+    userEmail = "andrew.dobrich@proton.me";
+    delta = {
       enable = true;
-      userName = "Andrew Dobrich";
-      userEmail = "andrew.dobrich@proton.me";
-      aliases = {
-        lg = "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit";
-      };
-      extraConfig = {
-        init = {defaultBranch = "main";};
-        core = {
-          editor = "${pkgs.helix}/bin/hx";
-          excludesfile = "$NIXOS_CONFIG_DIR/scripts/global_gitignore";
-        };
-      };
-      push = {
-        default = "matching";
-      };
-      pull = {
-        rebase = true;
+      options = {
+        features = "decorations";
+        navigate = true;
+        side-by-side = true;
       };
     };
-
-    # Use libreSSL and start the key agent
-    programs.ssh = {
-      enable = true;
-      startAgent = true;
+    aliases = {
+      lg = "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit";
     };
-    services.openssh = {
-      passowrdAuthentication = false;
-      permitRootLogin = lib.mkDeafault "no";
+    extraConfig = {
+      core.editor = home.sessionVariables.EDITOR;
     };
-    networking.firewall.allowedTCPPorts = [22];
   };
 }

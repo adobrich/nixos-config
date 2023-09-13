@@ -6,8 +6,8 @@
   inputs = {
     # Access to stable and unstable packages
     # https://github.com/NixOS/nixpkgs
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-22.11";
-    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
+    # nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.11";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     # Manage user environments
     # `home-manager` allows declarative configuration of user specifig (non-global)
@@ -27,7 +27,6 @@
     # https://github.com/hyprwm/Hyprland
     hyprland = {
       url = "github:hyprwm/Hyprland";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
   };
 
@@ -36,67 +35,64 @@
   outputs = {
     self,
     nixpkgs,
-    nixpkgs-unstable,
     home-manager,
     nixos-hardware,
     ...
   } @ inputs: let
     inherit (self) outputs;
-
     # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
-    stateVersion = "22.11";
+    stateVersion = "23.05";
 
     # Functions to generate packages for each system stolen from Misterio77... thanks!
     # https://github.com/Misterio77/nix-config
-    forEachSystem = nixpkgs.lib.genAttrs ["x86_64-linux" "aarch64-linux"];
-    forEachPkgs = f: forEachSystem (system: f nixpkgs.legacyPackages.${system});
+    forAllSystems = nixpkgs.lib.genAttrs ["x86_64-linux" "aarch64-linux"];
+    forEachPkg = f: forAllSystems (system: f nixpkgs.legacyPackages.${system});
+  in {
+    # Default dev shell config accessible via `nix develop`
+    devShells = forEachPkg (pkgs: import ./shell.nix {inherit pkgs;});
 
-    # Generate NixOS configurations
-    mkNixConfig = hostName: {
-      ${hostName} = nixpkgs.lib.nixosSystem {
+    # Nix formatter
+    formatter = forEachPkg (pkgs: pkgs.alejandra);
+
+    # Host configurations
+    nixosConfigurations = {
+      # Desktop
+      meshbox = nixpkgs.lib.nixosSystem {
+        modules = [./hosts/meshbox];
         specialArgs = {inherit inputs outputs stateVersion;};
-        modules = [./hosts/${hostName}];
+      };
+      # Laptop
+      pinebook-pro = nixpkgs.lib.nixosSystem {
+        modules = [./hosts/pinebook-pro];
+        specialArgs = {inherit inputs outputs nixos-hardware stateVersion;};
+      };
+      # Minecraft server
+      minecraft = nixpkgs.lib.nixosSystem {
+        modules = [./hosts/minecraft];
+        specialArgs = {inherit inputs outputs nixos-hardware stateVersion;};
       };
     };
 
-    # Generate home configurations
-    # users: a list of users to generate
-    # hostName: the host the user(s) will be on
-    # system: the architecture
-    # TODO: simplify the function.
-    mkHomeConfig = users: hostName: system: (
-      nixpkgs.lib.mapAttrs' (
-        username: _:
-          nixpkgs.lib.nameValuePair "${username}@${hostName}" (
-            home-manager.lib.homeManagerConfiguration {
-              pkgs = nixpkgs.legacyPackages.${system};
-              modules = [
-                ./home-manager/${username}/${hostName}
-              ];
-              extraSpecialArgs = {inherit inputs outputs stateVersion;};
-            }
-          )
-      ) (nixpkgs.lib.genAttrs users (user: user))
-    );
-  in {
-    # Default dev shell config
-    devShells = forEachPkgs (pkgs: import ./shell.nix {inherit pkgs;});
-
-    # Nix formatter
-    formatter = forEachPkgs (pkgs: pkgs.alejandra);
-
-    # Host configurations
-    nixosConfigurations =
-      # Desktop
-      mkNixConfig "meshbox"
-      # Laptop
-      // mkNixConfig "pinebook-pro";
-
     # Home Configurations for each user/host combo
-    homeConfigurations =
+    homeConfigurations = {
       # Desktop
-      mkHomeConfig ["andy" "minecraft"] "meshbox" "x86_64-linux"
+      "andy@meshbox" = home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages."x86_64-linux";
+        modules = [./home-manager/andy/meshbox];
+        extraSpecialArgs = {inherit inputs outputs stateVersion;};
+      };
       # Laptop
-      // mkHomeConfig ["andy"] "pinebook-pro" "aarch64-linux";
+      "andy@pinebook-pro" = home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages."aarch64-linux";
+        modules = [./home-manager/andy/pinebook-pro];
+        extraSpecialArgs = {inherit inputs outputs stateVersion;};
+      };
+      # Minecraft server (Raspberry pi 4)
+      "andy@minecraft" = home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages."aarch64-linux";
+        modules = [./home-manager/andy/minecraft];
+        extraSpecialArgs = {inherit inputs outputs stateVersion;};
+      };
+    };
   };
 }

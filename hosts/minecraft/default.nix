@@ -8,8 +8,7 @@
   ...
 }: {
   imports = [
-    nixos-hardware.nixosModules.pine64-pinebook-pro
-    nixos-hardware.nixosModules.common-pc-laptop-ssd
+    nixos-hardware.nixosModules.raspberry-pi-4
     ./hardware-configuration.nix
   ];
 
@@ -29,7 +28,6 @@
     };
   };
 
-  # TODO: console font seems to be reset shortly after being set. Disabling plymouth seems to fix it.  Check if there is a way to prevent plymouth from resetting the console font. Perhaps this is a driver loading issue?
   console = {
     packages = with pkgs; [terminus_font powerline-fonts];
     earlySetup = true;
@@ -42,12 +40,11 @@
 
   networking = {
     networkmanager.enable = true;
-    wireless.iwd.enable = true;
-    hostName = "pinebook-pro";
+    hostName = "minecraft";
     firewall = {
       enable = true;
-      allowedTCPPorts = [80 443];
-      allowedUDPPorts = [80 443];
+      # allowedTCPPorts = [80 443];
+      # allowedUDPPorts = [80 443];
     };
   };
 
@@ -56,7 +53,6 @@
     wget
     git
     nil
-    brightnessctl
     ripgrep
     alsa-utils
   ];
@@ -78,7 +74,7 @@
     shell = pkgs.fish;
   };
 
-  # TODO: this is defined here and in the home-manager config. Can probably be removed from home-config?
+  programs.ssh.startAgent = true;
   programs.fish.enable = true;
 
   services = {
@@ -86,29 +82,11 @@
       enable = true;
       openFirewall = true;
       settings = {
-        PermitRootLogin = "no";
-        PasswordAuthentication = false;
+        PermitRootLogin = "yes";
+        PasswordAuthentication = true;
         KbdInteractiveAuthentication = false;
       };
     };
-    # TODO: nvme won't wake after suspend. Disable lid switch for now.
-    logind.extraConfig = ''
-      RuntimeDirectorySize=8G
-      HandleLidSwitch=ignore
-      HandlePowerKey=ignore
-      HandlePowerKeyLongPress=poweroff
-    '';
-  };
-
-  hardware.pulseaudio.enable = false;
-  security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-    wireplumber.enable = true;
-    jack.enable = true;
   };
 
   fonts = {
