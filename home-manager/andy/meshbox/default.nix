@@ -15,7 +15,7 @@
     ../../../modules/helix
     # Cli
     ../../../modules/git
-    ../../../modules/exa
+    ../../../modules/eza
     ../../../modules/bat
     ../../../modules/starship
     ../../../modules/tealdeer
