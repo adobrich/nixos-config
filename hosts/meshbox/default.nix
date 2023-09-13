@@ -76,6 +76,7 @@
     ];
     hashedPassword = "$6$m678eqaL0J/S3ueG$gZFG3MvnuZKhd5fkrNHh5B115z02E5KUOmu4tbefeVPP.n/xD0VVB2wpUn2PO.z2MeeT8UxZZOh09nR/hsFiL1";
     openssh.authorizedKeys.keys = [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFhtfJrcLV69Ej3E9joq8B2AIf5JEUNzPIA6WpK/iKES andrew.dobrich@proton.me" # meshbox
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIInrZPGDzkLTdKgch1Yuyye0pDTLCIjdYt2FN+wGlFws andrew.dobrich@proton.me"
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGmyoAcn6ljqLSmiBkYS6pSHUY3Tup3tFiAXIRa8/bxb andrew.dobrich@protonmail.com"
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJlEFeVw4aOhY+UUPQqkWQ509M36lQMaI4Qjyvr7Qcao andrew.dobrich@protonmail.com"
