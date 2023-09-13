@@ -14,7 +14,7 @@
     kernelModules = [];
     extraModulePackages = [];
     kernelPackages = pkgs.linuxPackages_latest;
-    kernelParams = ["quiet"];
+    kernelParams = ["quiet" "mem_sleep_default=s2idle"];
     # Disable plymouth for now as it resets the console font
     # kernelParams = ["quiet" "plymouth.ignore-serial-consoles"];
     # plymouth.enable = false;

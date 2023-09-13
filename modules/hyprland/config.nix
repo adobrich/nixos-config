@@ -19,15 +19,7 @@ in ''
     inactive_opacity = 0.4
     fullscreen_opacity = 1.0
     rounding = 0
-    blur = no
-    blur_size = 3
-    blur_passes = 1
-    blur_new_optimizations = true
     drop_shadow = false
-    # shadow_range = 4
-    # shadow_offset =3 3
-    # col.shadow = rgba()
-    # col.shadow_inactive =rgba()
   }
 
   dwindle {
