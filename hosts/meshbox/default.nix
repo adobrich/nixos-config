@@ -13,6 +13,8 @@
     ./hardware-configuration.nix
     ../../modules/liquidctl
     ../../modules/minecraft/client
+    ../../modules/heimer
+    ../../modules/joystickwake
     ../../modules/kde-desktop
   ];
 
