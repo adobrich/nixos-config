@@ -10,6 +10,7 @@
   imports = [
     nixos-hardware.nixosModules.pine64-pinebook-pro
     nixos-hardware.nixosModules.common-pc-laptop-ssd
+    ../../modules/heimer
     ./hardware-configuration.nix
   ];
 
