@@ -17,6 +17,7 @@
     ../../modules/freerdp
     ../../modules/tigervnc
     ../../modules/whipper
+    ../../modules/picard
     ../../modules/joystickwake
     ../../modules/kde-desktop
   ];
