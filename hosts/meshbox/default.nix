@@ -15,7 +15,7 @@
     ../../modules/minecraft/client
     ../../modules/heimer
     ../../modules/freerdp
-    ../../modules/tigervnc
+    ../../modules/remmina
     ../../modules/whipper
     ../../modules/picard
     ../../modules/joystickwake
