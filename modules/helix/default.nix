@@ -19,7 +19,7 @@
         {
           name = "nix";
           auto-format = true;
-          language-server.command = "nil";
+          language-servers = ["nil"];
           formatter = {
             command = "alejandra";
             args = ["-qq"];
