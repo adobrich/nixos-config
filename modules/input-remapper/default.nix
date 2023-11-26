@@ -1,6 +1,6 @@
 {pkgs, ...}: {
   services.input-remapper.enable = true;
-  services.input-remapper.serviceWantedBy = ["multi-user.target"];
+  services.input-remapper.serviceWantedBy = ["default.target"];
 
   systemd.user.services.input-remapper-autoload = {
     enable = true;
@@ -10,7 +10,8 @@
     serviceConfig = {
       Type = "oneshot";
       ExecStart = [
-        "${pkgs.input-remapper}/bin/input-remapper-control --command stop-all && ${pkgs.input-remapper}/bin/input-remapper-control --command autoload"
+        "${pkgs.input-remapper}/bin/input-remapper-control --command stop-all"
+        "${pkgs.input-remapper}/bin/input-remapper-control --command autoload"
       ];
     };
   };
