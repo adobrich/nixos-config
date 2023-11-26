@@ -20,6 +20,7 @@
     ../../modules/picard
     ../../modules/joystickwake
     ../../modules/kde-desktop
+    ../../modules/input-remapper
   ];
 
   nix = {
@@ -48,6 +49,8 @@
 
   time.timeZone = "Australia/Melbourne";
   i18n.defaultLocale = "en_AU.UTF-8";
+
+  systemd.services.NetworkManager-wait-online.enable = false;
 
   networking = {
     networkmanager.enable = true;
