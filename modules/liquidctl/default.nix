@@ -19,7 +19,7 @@
       ExecStart = [
         "${pkgs.liquidctl}/bin/liquidctl initialize --match NZXT"
         "${pkgs.liquidctl}/bin/liquidctl --match NZXT set pump speed 20 30 30 50 34 60 40 70 50 80"
-        "${pkgs.liquidctl}/bin/liquidctl --match NZXT set fan speed 20 40 30 60 34 80 40 90 50 100"
+        "${pkgs.liquidctl}/bin/liquidctl --match NZXT set fan speed 20 40 25 60 29 80 35 90 40 100"
         "${pkgs.liquidctl}/bin/liquidctl --match NZXT set lcd screen orientation 270"
       ];
     };
