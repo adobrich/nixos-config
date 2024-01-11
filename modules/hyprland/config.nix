@@ -14,7 +14,6 @@ in ''
   }
 
   decoration {
-    multisample_edges = true
     active_opacity = 1.0
     inactive_opacity = 0.4
     fullscreen_opacity = 1.0

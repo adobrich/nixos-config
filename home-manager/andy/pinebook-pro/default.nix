@@ -22,6 +22,7 @@
     ../../../modules/wofi
     ../../../modules/starship
     # Gui Apps
+    ../../../modules/qutebrowser
     ../../../modules/firefox
     ../../../modules/eww
   ];
