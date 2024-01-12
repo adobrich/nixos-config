@@ -23,6 +23,7 @@
     ../../../modules/brave
     ../../../modules/steam
     ../../../modules/nextcloud
+    ../../../modules/calibre
   ];
   home = {
     username = "andy";
