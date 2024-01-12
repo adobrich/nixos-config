@@ -21,6 +21,8 @@
     ../../modules/joystickwake
     ../../modules/kde-desktop
     ../../modules/input-remapper
+    # ../../modules/brave
+    ../../modules/firefox
   ];
 
   nix = {
@@ -124,6 +126,8 @@
       liberation_ttf
       ubuntu_font_family
       work-sans
+      ipafont
+      kochi-substitute
     ];
 
     enableDefaultPackages = false;

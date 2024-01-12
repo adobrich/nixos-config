@@ -25,6 +25,12 @@
             args = ["-qq"];
           };
         }
+        {
+          name = "rust";
+          auto-format = true;
+          language-servers = ["rust-analyzer"];
+          timeout = 60;
+        }
       ];
     };
   };
