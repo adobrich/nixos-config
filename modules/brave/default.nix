@@ -12,12 +12,12 @@
       "eimadpbcbfnmbkopoojfekhnkhdbieeh" # Dark reader
       "pkehgijcmpdhfbdbbnkijodmdjhbjlgp" # Privacy Badger
     ];
-    extraOpts = {
-      "SpellcheckEnabled" = true;
-      "SpellcheckLanguage" = [
-        "en-AU"
-        "en-GB"
-      ];
-    };
+    # extraOpts = {
+    #   "SpellcheckEnabled" = true;
+    #   "SpellcheckLanguage" = [
+    #     "en-AU"
+    #     "en-GB"
+    #   ];
+    # };
   };
 }

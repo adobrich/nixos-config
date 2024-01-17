@@ -14,6 +14,7 @@
         soft-wrap.enable = true;
       };
     };
+
     languages = {
       language = [
         {
@@ -29,11 +30,13 @@
           name = "rust";
           auto-format = true;
           language-servers = ["rust-analyzer"];
-          timeout = 60;
         }
       ];
+      language-server.rust-analyzer = {
+        timeout = 60;
+      };
     };
   };
   # Extra language packages
-  home.packages = with pkgs; [alejandra];
+  home.packages = with pkgs; [alejandra rust-analyzer elixir-ls];
 }
