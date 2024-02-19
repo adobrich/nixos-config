@@ -20,7 +20,7 @@
 
     # Access to hardware optimisations and settings for specific hardware
     # https://github.com/NixOS/nixos-hardware
-    nixos-hardware.url = "github:NixOS/nixos-hardware";
+    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
     # Hyprland - a dynamic tiling Wayland compositor based on wlroots that
     # doesn't sacrifice on its looks

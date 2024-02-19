@@ -10,6 +10,7 @@
   imports = [
     nixos-hardware.nixosModules.pine64-pinebook-pro
     nixos-hardware.nixosModules.common-pc-laptop-ssd
+    nixos-hardware.nixosModules.common-pc-laptop-acpi_call
     ../../modules/heimer
     ./hardware-configuration.nix
   ];
@@ -79,6 +80,10 @@
     ];
     shell = pkgs.fish;
   };
+
+  services.devmon.enable = true;
+  services.gvfs.enable = true;
+  services.udisks2.enable = true;
 
   # TODO: this is defined here and in the home-manager config. Can probably be removed from home-config?
   programs.fish.enable = true;
