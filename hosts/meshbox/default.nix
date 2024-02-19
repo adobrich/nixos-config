@@ -21,8 +21,9 @@
     ../../modules/joystickwake
     ../../modules/kde-desktop
     ../../modules/input-remapper
-    # ../../modules/brave
     ../../modules/firefox
+    ../../modules/lm_sensors
+    ../../modules/pavucontrol
   ];
 
   nix = {

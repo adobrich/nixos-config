@@ -20,17 +20,17 @@
     ../../../modules/starship
     ../../../modules/tealdeer
     # Gui Apps
-    ../../../modules/brave
     ../../../modules/steam
     ../../../modules/nextcloud
     ../../../modules/calibre
+    ../../../modules/firefox
   ];
   home = {
     username = "andy";
     homeDirectory = "/home/andy";
     sessionPath = ["$HOME/.local/bin"];
     sessionVariables = {
-      BROWSER = "brave";
+      BROWSER = "firefox";
       EDITOR = "hx";
       TERMINAL = "foot";
     };
