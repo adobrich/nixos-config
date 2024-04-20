@@ -24,6 +24,7 @@
     ../../modules/firefox
     ../../modules/lm_sensors
     ../../modules/pavucontrol
+    ../../modules/libresprite
   ];
 
   nix = {

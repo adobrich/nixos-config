@@ -60,10 +60,12 @@
     };
     bluetooth = {
       enable = true;
+      powerOnBoot = true;
       settings.General = {
         ControllerMode = "dual";
-        JustWorksRepairing = "always";
+        # JustWorksRepairing = "always";
         FastConnectable = true;
+        Experimental = true;
       };
     };
     steam-hardware.enable = true;
