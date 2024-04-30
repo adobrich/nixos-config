@@ -25,6 +25,7 @@
     ../../modules/lm_sensors
     ../../modules/pavucontrol
     ../../modules/libresprite
+    ../../modules/unityhub
   ];
 
   nix = {
