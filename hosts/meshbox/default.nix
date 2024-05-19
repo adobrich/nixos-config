@@ -25,7 +25,9 @@
     ../../modules/lm_sensors
     ../../modules/pavucontrol
     ../../modules/libresprite
+    # Unity game dev stuff
     ../../modules/unityhub
+    ../../modules/vscode
   ];
 
   nix = {

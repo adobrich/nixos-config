@@ -31,6 +31,11 @@
           auto-format = true;
           language-servers = ["rust-analyzer"];
         }
+        {
+          name = "c-sharp";
+          auto-format = true;
+          language-servers = ["c-sharp"];
+        }
       ];
       language-server.rust-analyzer = {
         timeout = 60;
