@@ -24,6 +24,7 @@
     ../../../modules/nextcloud
     ../../../modules/calibre
     ../../../modules/firefox
+    ../../../modules/vscode
   ];
   home = {
     username = "andy";

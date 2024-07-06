@@ -20,7 +20,7 @@
     ];
     initrd.kernelModules = [];
     kernelModules = ["kvm-amd"];
-    kernelParams = ["quiet"];
+    kernelParams = ["quiet" "fsck.mode=force"];
     extraModulePackages = [];
 
     plymouth.enable = true;
@@ -47,11 +47,12 @@
   swapDevices = [{device = "/dev/disk/by-label/swap";}];
 
   hardware = {
-    opengl = {
+    graphics = {
       enable = true;
-      driSupport = true;
-      driSupport32Bit = true;
-      setLdLibraryPath = true;
+      enable32Bit = true;
+      # driSupport = true;
+      # driSupport32Bit = true;
+      # setLdLibraryPath = true;
       # TODO: Crashing - comment out for now to see if that fixes the problem
       # extraPackages = with pkgs; [
       # rocm-opencl-icd

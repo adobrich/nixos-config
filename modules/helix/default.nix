@@ -34,7 +34,7 @@
         {
           name = "c-sharp";
           auto-format = true;
-          language-servers = ["c-sharp"];
+          language-servers = ["omnisharp"];
         }
       ];
       language-server.rust-analyzer = {
@@ -43,5 +43,5 @@
     };
   };
   # Extra language packages
-  home.packages = with pkgs; [alejandra rust-analyzer elixir-ls];
+  home.packages = with pkgs; [alejandra rust-analyzer elixir-ls dotnet-sdk omnisharp-roslyn];
 }

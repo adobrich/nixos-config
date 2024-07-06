@@ -25,9 +25,9 @@
     ../../modules/lm_sensors
     ../../modules/pavucontrol
     ../../modules/libresprite
+    # ../../modules/steam
     # Unity game dev stuff
     ../../modules/unityhub
-    ../../modules/vscode
   ];
 
   nix = {
@@ -67,8 +67,14 @@
     hostId = "3ac54e7d";
     firewall = {
       enable = true;
-      # allowedTCPPorts = [80 443];
-      # allowedUDPPorts = [80 443];
+      allowedTCPPorts = [27036 27015 27040];
+      allowedUDPPorts = [27036 27015];
+      allowedUDPPortRanges = [
+        {
+          from = 27031;
+          to = 27035;
+        }
+      ];
     };
   };
 
@@ -80,6 +86,8 @@
     ripgrep
     alsa-utils
   ];
+
+  services.fwupd.enable = true;
 
   users.users.andy = {
     description = "Andrew Dobrich";
