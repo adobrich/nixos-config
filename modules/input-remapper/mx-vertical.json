@@ -1,0 +1,15 @@
+[
+    {
+        "input_combination": [
+            {
+                "type": 1,
+                "code": 275,
+                "origin_hash": "df276ca02fe1e9b13ba6fed838c557c3"
+            }
+        ],
+        "target_uinput": "mouse",
+        "output_symbol": "BTN_MIDDLE",
+        "name": "Side btn to middle btn",
+        "mapping_type": "key_macro"
+    }
+]

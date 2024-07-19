@@ -16,7 +16,7 @@
     ../../modules/heimer
     ../../modules/freerdp
     ../../modules/remmina
-    ../../modules/whipper
+    # ../../modules/whipper
     ../../modules/picard
     ../../modules/joystickwake
     ../../modules/kde-desktop

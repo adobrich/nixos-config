@@ -20,6 +20,7 @@
     ../../../modules/starship
     ../../../modules/tealdeer
     # Gui Apps
+    ../../../modules/input-remapper/config.nix
     ../../../modules/steam
     ../../../modules/nextcloud
     ../../../modules/calibre
